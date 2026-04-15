@@ -46,7 +46,7 @@ def create_event(dados: CreateEventReq, db: Session = Depends(get_db),payload: d
     user = get_active_user(db,payload["sub"])
 
     if not user.ativo:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Você não pode realizar essa ação!")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Acesso Restrito!")
 
     novo_evento = Evento(titulo=dados.titulo,descricao=dados.descricao,
                          data=dados.data,parque=dados.parque,id_admin=int(payload["sub"]))
