@@ -1,17 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from routers.admins import router as admins_router
 from routers.eventos import router as eventos_router
 from routers.logs import router as logs_router
 from services.weather import router as clima_router
 from services.chat import router as chat_router
 
+from models import models
+from DB.config import Base,engine
+
+Base.metadata.create_all(engine)
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://igorvictor23.github.io"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
