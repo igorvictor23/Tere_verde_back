@@ -55,5 +55,28 @@ Certifique-se de ter instalado em sua máquina:
 
 ### 2. Clonar o Repositório
 ```bash
-git clone [https://github.com/seu-usuario/tere-verde-back.git](https://github.com/seu-usuario/tere-verde-back.git)
+git clone https://github.com/seu-usuario/tere-verde-back.git
 cd tere-verde-back
+```
+
+### 3. Configurar as Variáveis de Ambiente
+Crie um arquivo chamado `.env` no diretório raiz do projeto. Preencha com as suas credenciais reais, garantindo que o banco de dados já esteja criado no seu PostgreSQL:
+```bash
+DATABASE_URL=postgresql://seu_usuario:sua_senha@localhost:5432/nome-do-banco
+SECRET_JWT=sua_chave_jwt
+ALGORITHM=HS256
+GEMINI_API_KEY=sua_chave_api_google
+```
+
+### 4. Instalar as Dependências (uv.lock)
+Utilize o comando `sync` do uv. Ele lerá o `pyproject.toml` e o `uv.lock`, criará o ambiente virtual automaticamente (`.venv`) e instalará as versões exatas mapeadas:
+```bash
+uv sync
+```
+
+### 5. Iniciar o Servidor
+Com o ambiente ativado e o banco de dados rodando, inicie a aplicação via Uvicorn:
+```bash
+uvicorn main:app --reload
+```
+A API estará acessível em `http://localhost:8000`.
